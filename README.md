@@ -6,8 +6,10 @@
 
 ## עלייה לאוויר
 
-ב‑GitHub Pages: **Settings → Pages → Source: Deploy from a branch → main → / (root)**.
-הכתובת שתתקבל: `https://shayh22.github.io/birkat-hanasi/`.
+ב‑GitHub Pages, פעם אחת: **Settings → Pages → Source: Deploy from a branch → main → / (root) → Save**.
+תוך דקה או שתיים האתר עולה לכתובת `https://shayh22.github.io/birkat-hanasi/`, וכל push ל‑main
+מתפרסם מעצמו מכאן והלאה. (אין דרך להפעיל את Pages מתוך workflow — ה‑token של Actions לא
+מורשה ליצור את האתר, רק לפרוס אליו אחרי שהוא קיים.)
 
 לדומיין משלכם: מוסיפים קובץ `CNAME` בשורש עם הדומיין, מפנים אליו רשומת DNS,
 ומעדכנים בהתאם את `<link rel="canonical">` ותגי ה‑Open Graph ב‑`index.html`
