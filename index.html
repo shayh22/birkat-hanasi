@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;800;900&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
 
     <script type="application/ld+json">
     {
@@ -47,7 +47,7 @@
         (function () {
             var root = document.documentElement;
             try {
-                var a = JSON.parse(localStorage.getItem('tells.a11y') || '{}');
+                var a = JSON.parse(localStorage.getItem('birkat.a11y') || '{}');
                 window.__a11yState = { size: a.size || 100 };
                 if (a.size && a.size !== 100) root.style.fontSize = a.size + '%';
                 var flags = { contrast: 'a11y-contrast', grayscale: 'a11y-grayscale',
@@ -77,7 +77,7 @@
     </script>
 </head>
 <body>
-<script src="intro.js"></script>
+<script src="intro.js?v=2"></script>
 
 <a class="skip-link" href="#main">דילוג לתוכן המרכזי</a>
 
@@ -369,7 +369,7 @@
     <button type="button" class="a11y-reset" data-a11y="reset">איפוס הגדרות הנגישות</button>
 </div>
 
-<script src="a11y.js" defer></script>
-<script src="motion.js" defer></script>
+<script src="a11y.js?v=2" defer></script>
+<script src="motion.js?v=2" defer></script>
 </body>
 </html>

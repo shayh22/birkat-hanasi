@@ -3,7 +3,7 @@
    re-applied before paint by the inline snippet in each page's <head>, so a
    reader's choices survive navigation between story pages. */
 (function () {
-    var KEY = 'tells.a11y';
+    var KEY = 'birkat.a11y';
     var STEPS = [90, 100, 110, 125, 140, 160];
     var FLAGS = {
         contrast: 'a11y-contrast',
