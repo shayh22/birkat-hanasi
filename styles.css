@@ -219,11 +219,34 @@ a:hover { color: var(--accent-hover); }
 
 /* ---- header ------------------------------------------------------- */
 
+/* The header rides along with the reader — logo, nav and the WhatsApp mark
+   together. It sits below the accessibility drawer and the opening logo in
+   the stacking order, and tightens a little once it leaves the top. */
 .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 90;
     border-bottom: 1px solid var(--line);
     background: var(--bg-primary);
+    transition: box-shadow 0.3s ease;
+}
+@supports (backdrop-filter: blur(6px)) {
+    .site-header {
+        background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+        backdrop-filter: blur(10px);
+    }
+}
+.site-header.is-stuck { box-shadow: 0 12px 26px -22px rgba(10, 26, 48, 0.9); }
+.site-header.is-stuck .wrap { padding-block: 0.55rem; }
+.site-header.is-stuck .brand img { width: 2.35rem; height: 2.35rem; }
+
+/* anchors land below the header instead of behind it */
+:where(main, main [id]) { scroll-margin-top: 5.5rem; }
+@media (max-width: 60rem) {
+    :where(main, main [id]) { scroll-margin-top: 7.5rem; }
 }
 .site-header .wrap {
+    transition: padding 0.3s ease;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -595,7 +618,6 @@ a:hover { color: var(--accent-hover); }
 }
 /* the header keeps the logo's place while the big one is still flying to it */
 .intro-playing .brand img { visibility: hidden; }
-.intro-playing, .intro-playing body { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
     .intro { display: none; }
@@ -699,7 +721,7 @@ a:hover { color: var(--accent-hover); }
 
 /* small, everyday feedback */
 .btn:active { transform: translateY(1px) scale(0.99); }
-.brand img { transition: transform 0.4s cubic-bezier(.34,1.56,.64,1); }
+.brand img { transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), width 0.3s ease, height 0.3s ease; }
 .brand:hover img { transform: rotate(-10deg) scale(1.06); }
 .project-link .arrow { transition: transform 0.25s ease; }
 .project-link:hover .arrow { transform: translateX(-0.35rem); }

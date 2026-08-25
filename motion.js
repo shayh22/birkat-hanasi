@@ -39,9 +39,48 @@
             entry.target.classList.add('in');
             io.unobserve(entry.target);
         });
-    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -4% 0px', threshold: 0.05 });
 
     watched.forEach(function (el) { io.observe(el); });
+
+    /* Landing straight on /#work starts the page mid-document, where the
+       observer's first report cannot always be trusted. Measure once
+       ourselves at the moments the position can change under us. */
+    function revealVisible() {
+        var height = window.innerHeight || document.documentElement.clientHeight;
+        watched.forEach(function (el) {
+            if (el.classList.contains('in')) return;
+            var box = el.getBoundingClientRect();
+            if (box.top < height && box.bottom > 0) {
+                el.classList.add('in');
+                io.unobserve(el);
+            }
+        });
+    }
+    var queued = false;
+    function scheduleReveal() {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () {
+            queued = false;
+            revealVisible();
+            if (!watched.some(function (el) { return !el.classList.contains('in'); })) {
+                window.removeEventListener('scroll', scheduleReveal);
+            }
+        });
+    }
+    revealVisible();
+    window.addEventListener('load', scheduleReveal);
+    window.addEventListener('hashchange', scheduleReveal);
+    window.addEventListener('scroll', scheduleReveal, { passive: true });
+
+    /* Images arriving late move everything below them, so a block can slide
+       into view without a scroll ever happening. Watch the document's own
+       size for that. */
+    if ('ResizeObserver' in window) {
+        var ro = new ResizeObserver(scheduleReveal);
+        ro.observe(document.body);
+    }
 
     /* Last line of defence: whatever has not been reached by then is shown
        anyway, so no reader can end up facing a blank stretch of page. */
