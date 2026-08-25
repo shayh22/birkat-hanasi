@@ -183,6 +183,31 @@ a:hover { color: var(--accent-hover); }
 .btn-whatsapp svg { width: 1.35em; height: 1.35em; }
 .a11y-contrast .btn-whatsapp { background: #ffffff; color: #000000; box-shadow: none; }
 
+/* In the header the call to action is the mark alone, pinned to the far end
+   of the logo's row. It keeps a 44px target and an accessible name. */
+.wa-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #25d366;
+    color: #05271a;
+    box-shadow: 0 8px 18px -10px rgba(37, 211, 102, 0.95);
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), background 0.2s ease;
+}
+.wa-icon svg { width: 1.55rem; height: 1.55rem; display: block; }
+.wa-icon:hover { background: #1ebe5b; color: #05271a; transform: translateY(-2px) scale(1.07); }
+.wa-icon:active { transform: translateY(0) scale(0.97); }
+.a11y-contrast .wa-icon {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    box-shadow: none;
+}
+
 .btn-ghost {
     background: none;
     color: var(--text-main);
@@ -247,7 +272,6 @@ a:hover { color: var(--accent-hover); }
     padding-block: 0.5rem;
 }
 .site-nav a:hover { color: var(--accent); }
-.site-nav .btn-primary { color: var(--accent-on); }
 
 @media (max-width: 60rem) {
     .site-nav {
