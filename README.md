@@ -13,8 +13,10 @@
 לפרוס לאתר, לא ליצור אותו.
 
 **הדומיין** מוגדר בקובץ `CNAME` שבשורש. ב‑DNS של הדומיין מוגדרות ארבע רשומות A לכתובות
-של GitHub Pages, ובהגדרות Pages מסומן Enforce HTTPS. הכתובת הישנה
-`shayh22.github.io/birkat-hanasi/` ממשיכה לעבוד ומפנה לכאן.
+של GitHub Pages, ולצידן רשומת CNAME מ‑`www` אל `shayh22.github.io`. הכתובת בקובץ `CNAME`
+היא הכתובת הקנונית, ו‑GitHub מפנה אליה את הגרסה השנייה מעצמו — כך ש‑`www.birkat-hanasi.co.il`
+ו‑`birkat-hanasi.co.il` שניהם עובדים, ותעודת ה‑HTTPS מכסה את שניהם. בהגדרות Pages מסומן
+Enforce HTTPS. גם הכתובת הישנה `shayh22.github.io/birkat-hanasi/` ממשיכה לעבוד ומפנה לכאן.
 
 אם הדומיין משתנה: מעדכנים את `CNAME`, את `<link rel="canonical">` ותגי ה‑Open Graph
 ב‑`index.html` וב‑`accessibility.html`, את ה‑JSON-LD, ואת הכתובות ב‑`sitemap.xml`
