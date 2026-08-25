@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shayh22.github.io/birkat-hanasi/sitemap.xml
+Sitemap: https://birkat-hanasi.co.il/sitemap.xml

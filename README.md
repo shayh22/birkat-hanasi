@@ -6,14 +6,19 @@
 
 ## עלייה לאוויר
 
-ב‑GitHub Pages, פעם אחת: **Settings → Pages → Source: Deploy from a branch → main → / (root) → Save**.
-תוך דקה או שתיים האתר עולה לכתובת `https://shayh22.github.io/birkat-hanasi/`, וכל push ל‑main
-מתפרסם מעצמו מכאן והלאה. (אין דרך להפעיל את Pages מתוך workflow — ה‑token של Actions לא
-מורשה ליצור את האתר, רק לפרוס אליו אחרי שהוא קיים.)
+האתר מתפרסם מ‑GitHub Pages בכל push ל‑main, ומוגש מהדומיין `birkat-hanasi.co.il`.
 
-לדומיין משלכם: מוסיפים קובץ `CNAME` בשורש עם הדומיין, מפנים אליו רשומת DNS,
-ומעדכנים בהתאם את `<link rel="canonical">` ותגי ה‑Open Graph ב‑`index.html`
-וב‑`accessibility.html`, ואת הכתובות ב‑`sitemap.xml` וב‑`robots.txt`.
+**הפעלה חד‑פעמית** (אם Pages עדיין כבוי): Settings → Pages → Source: Deploy from a branch
+→ main → / (root) → Save. אין דרך להפעיל את Pages מתוך workflow — ה‑token של Actions מורשה
+לפרוס לאתר, לא ליצור אותו.
+
+**הדומיין** מוגדר בקובץ `CNAME` שבשורש. ב‑DNS של הדומיין מוגדרות ארבע רשומות A לכתובות
+של GitHub Pages, ובהגדרות Pages מסומן Enforce HTTPS. הכתובת הישנה
+`shayh22.github.io/birkat-hanasi/` ממשיכה לעבוד ומפנה לכאן.
+
+אם הדומיין משתנה: מעדכנים את `CNAME`, את `<link rel="canonical">` ותגי ה‑Open Graph
+ב‑`index.html` וב‑`accessibility.html`, את ה‑JSON-LD, ואת הכתובות ב‑`sitemap.xml`
+וב‑`robots.txt`.
 
 ## מבנה
 
