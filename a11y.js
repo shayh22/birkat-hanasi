@@ -125,5 +125,23 @@
         });
     }
 
+    /* When the device asks for less motion the page stays still by default.
+       Say so where the reader is already looking for such switches, and let
+       them overrule it for this site. */
+    var note = document.getElementById('a11yMotionNote');
+    var motionOn = document.getElementById('a11yMotionOn');
+    if (note && motionOn) {
+        var reduced = false;
+        try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+        if (reduced && state.motion !== false) {
+            note.hidden = false;
+            motionOn.addEventListener('click', function () {
+                state.motion = false;
+                save();
+                location.reload();
+            });
+        }
+    }
+
     apply();
 })();

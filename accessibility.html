@@ -15,14 +15,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;800;900&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 
     <script>
         (function () {
             var root = document.documentElement;
             try {
                 var a = JSON.parse(localStorage.getItem('birkat.a11y') || '{}');
+                window.__a11yPrefs = a;
                 window.__a11yState = { size: a.size || 100 };
+                /* an explicit "animations are welcome here" has to survive
+                   into the drawer's state, or the next save would drop it */
+                if (a.motion === false) window.__a11yState.motion = false;
                 if (a.size && a.size !== 100) root.style.fontSize = a.size + '%';
                 var flags = { contrast: 'a11y-contrast', grayscale: 'a11y-grayscale',
                               underline: 'a11y-underline', readable: 'a11y-readable',
@@ -30,7 +34,7 @@
                 for (var k in flags) {
                     if (a[k]) { root.classList.add(flags[k]); window.__a11yState[k] = true; }
                 }
-            } catch (e) { window.__a11yState = { size: 100 }; }
+            } catch (e) { window.__a11yPrefs = {}; window.__a11yState = { size: 100 }; }
         })();
     </script>
 </head>
@@ -74,7 +78,8 @@
         </ul>
 
         <h2>תפריט הנגישות</h2>
-        <p>בפינה העליונה של כל עמוד נמצא כפתור תפריט הנגישות. בתפריט אפשר להגדיל ולהקטין טקסט, להפעיל ניגודיות גבוהה, לעבור לגווני אפור, להדגיש קישורים בקו תחתון, לעבור לגופן קריא ולעצור אנימציות. הבחירות נשמרות בדפדפן וממשיכות לעמודים הבאים באתר.</p>
+        <p>בפינה התחתונה של כל עמוד נמצא כפתור תפריט הנגישות. בתפריט אפשר להגדיל ולהקטין טקסט, להפעיל ניגודיות גבוהה, לעבור לגווני אפור, להדגיש קישורים בקו תחתון, לעבור לגופן קריא ולעצור אנימציות. הבחירות נשמרות בדפדפן וממשיכות לעמודים הבאים באתר.</p>
+        <p>אם המכשיר שלכם מבקש להפחית תנועה — למשל במצב חיסכון בסוללה או בהגדרת נגישות של מערכת ההפעלה — האתר מכבד את הבקשה והאנימציות כבויות מלכתחילה. בתפריט הנגישות תופיע במקרה כזה אפשרות להפעיל אותן בכל זאת.</p>
 
         <h2>מגבלות ידועות</h2>
         <ul>
@@ -84,7 +89,7 @@
         </ul>
 
         <h2>פנייה בנושא נגישות</h2>
-        <p>נתקלתם בבעיית נגישות באתר, או שיש לכם הצעה לשיפור? נשמח לשמוע ולתקן. רכז הנגישות שלנו: <strong>[שם רכז/ת הנגישות]</strong>.</p>
+        <p>נתקלתם בבעיית נגישות באתר, או שיש לכם הצעה לשיפור? נשמח לשמוע ולתקן. רכז הנגישות שלנו: <strong>שי הירש</strong>.</p>
         <ul>
             <li>טלפון: <a href="tel:+972533319072" dir="ltr">053-331-9072</a></li>
             <li>דוא״ל: <a href="mailto:shayh22@gmail.com" dir="ltr">shayh22@gmail.com</a></li>
@@ -134,10 +139,14 @@
     <button type="button" class="a11y-opt" data-a11y="underline" aria-pressed="false">הדגשת קישורים</button>
     <button type="button" class="a11y-opt" data-a11y="readable" aria-pressed="false">גופן קריא</button>
     <button type="button" class="a11y-opt" data-a11y="motion" aria-pressed="false">עצירת אנימציות</button>
+    <div class="a11y-note" id="a11yMotionNote" hidden>
+        <p>המכשיר שלך מבקש להפחית תנועה, ולכן האנימציות באתר כבויות.</p>
+        <button type="button" class="a11y-reset" id="a11yMotionOn">הפעלת אנימציות בכל זאת</button>
+    </div>
     <button type="button" class="a11y-reset" data-a11y="reset">איפוס הגדרות הנגישות</button>
 </div>
 
-<script src="a11y.js?v=3" defer></script>
-<script src="header.js?v=3" defer></script>
+<script src="a11y.js?v=4" defer></script>
+<script src="header.js?v=4" defer></script>
 </body>
 </html>

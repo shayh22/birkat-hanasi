@@ -67,7 +67,11 @@ html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    *, *::before, *::after {
+    /* .motion-forced marks a reader who asked for the animations back from
+       the accessibility drawer, against their device's default */
+    :root:not(.motion-forced) *,
+    :root:not(.motion-forced) *::before,
+    :root:not(.motion-forced) *::after {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
     }
@@ -620,8 +624,8 @@ a:hover { color: var(--accent-hover); }
 .intro-playing .brand img { visibility: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
-    .intro { display: none; }
-    .intro-playing .brand img { visibility: visible; }
+    :root:not(.motion-forced) .intro { display: none; }
+    :root:not(.motion-forced) .intro-playing .brand img { visibility: visible; }
 }
 .a11y-no-motion .intro { display: none; }
 .a11y-no-motion .brand img { visibility: visible; }
@@ -763,10 +767,10 @@ a:hover { color: var(--accent-hover); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .motion-ready .hero-mesh,
-    .motion-ready .hero-mesh circle,
-    .motion-ready .project-art img,
-    .motion-ready .btn-pulse::after { animation: none; }
+    .motion-ready:not(.motion-forced) .hero-mesh,
+    .motion-ready:not(.motion-forced) .hero-mesh circle,
+    .motion-ready:not(.motion-forced) .project-art img,
+    .motion-ready:not(.motion-forced) .btn-pulse::after { animation: none; }
 }
 .a11y-no-motion :where(.hero .eyebrow, .hero h1, .hero-aside p, .hero-actions, .strip li,
     .section-head, .service, .project, .step,
@@ -974,6 +978,18 @@ a:hover { color: var(--accent-hover); }
 }
 .a11y-opt[aria-pressed="true"] { border-color: var(--accent-border); color: var(--accent); }
 .a11y-opt[aria-pressed="true"]::after { background: var(--accent); }
+
+.a11y-note {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 0.85rem;
+    background: var(--accent-light);
+    border: 1px solid var(--accent-border);
+    border-radius: var(--radius-md);
+}
+.a11y-note p { font-size: 0.85rem; line-height: 1.5; color: var(--text-body); }
+.a11y-note .a11y-reset { margin-top: 0; border-style: solid; color: var(--accent); }
 
 .a11y-reset {
     min-height: 44px;
