@@ -168,6 +168,21 @@ a:hover { color: var(--accent-hover); }
     transform: translateY(-2px);
 }
 
+/* WhatsApp's own green carries the button, with ink dark enough to read on
+   it — white text on #25D366 sits at 1.98:1 and fails the standard. */
+.btn-whatsapp {
+    background: #25d366;
+    color: #05271a;
+    box-shadow: 0 10px 24px -14px rgba(37, 211, 102, 0.9);
+}
+.btn-whatsapp:hover {
+    background: #1ebe5b;
+    color: #05271a;
+    transform: translateY(-2px);
+}
+.btn-whatsapp svg { width: 1.35em; height: 1.35em; }
+.a11y-contrast .btn-whatsapp { background: #ffffff; color: #000000; box-shadow: none; }
+
 .btn-ghost {
     background: none;
     color: var(--text-main);
@@ -486,8 +501,7 @@ a:hover { color: var(--accent-hover); }
 }
 .contact-lead { color: var(--band-muted); font-size: 1.15rem; max-width: 34rem; }
 .contact-actions { display: flex; flex-direction: column; gap: 1.1rem; }
-.contact .btn-primary { background: var(--band-accent); color: #071426; font-size: 1.2rem; min-height: 3.5rem; }
-.contact .btn-primary:hover { background: #e8bb5c; color: #071426; }
+.contact .btn-whatsapp { font-size: 1.2rem; min-height: 3.5rem; }
 .contact-list {
     display: flex;
     flex-direction: column;
@@ -565,6 +579,160 @@ a:hover { color: var(--accent-hover); }
 }
 .a11y-no-motion .intro { display: none; }
 .a11y-no-motion .brand img { visibility: visible; }
+
+/* ---- motion -------------------------------------------------------
+   Everything below is opt-in: the head script adds .motion-ready only when
+   the reader has not asked for less motion, so without it (or without JS)
+   the page renders complete and still. */
+
+/* What moves in, and from where. These live as plain selectors rather than a
+   class the script adds, so the first paint already has them hidden — no
+   flash of content that then jumps. The list is wrapped in :where() so it
+   carries no specificity of its own and .in below always wins. */
+.motion-ready :where(.hero .eyebrow, .hero h1, .hero-aside p, .hero-actions, .strip li,
+    .section-head, .service, .project, .step,
+    .contact h2, .contact-lead, .contact-actions) {
+    opacity: 0;
+    transform: translateY(1.5rem);
+}
+.motion-ready :where(.section-head) { transform: translateX(1.75rem); }
+
+.motion-ready .in {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity 0.75s cubic-bezier(.2,.7,.3,1),
+        transform 0.75s cubic-bezier(.2,.7,.3,1);
+    /* the opening logo holds the stage for a beat before the hero arrives */
+    transition-delay: calc(var(--d, 0s) + var(--intro-hold, 0s));
+}
+
+/* the mesh turns once every two minutes — movement you notice only if you
+   stay and look */
+.motion-ready .hero-mesh { animation: mesh-drift 150s linear infinite; }
+.motion-ready .hero-mesh circle { animation: node-breathe 6s ease-in-out infinite; }
+.motion-ready .hero-mesh circle:nth-child(2n) { animation-delay: 1.4s; }
+.motion-ready .hero-mesh circle:nth-child(3n) { animation-delay: 2.9s; }
+
+@keyframes mesh-drift {
+    to { transform: rotate(360deg); }
+}
+@keyframes node-breathe {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+}
+
+/* a project row arrives as a whole: the text from the start edge, the phone
+   from the other side. The float lives on the image, so it cannot fight the
+   entrance transform on the frame. */
+.motion-ready .project .project-body,
+.motion-ready .project .project-art {
+    opacity: 0;
+    transition:
+        opacity 0.7s cubic-bezier(.2,.7,.3,1) 0.1s,
+        transform 0.7s cubic-bezier(.2,.7,.3,1) 0.1s;
+}
+.motion-ready .project .project-body { transform: translateX(1.75rem); }
+.motion-ready .project .project-art { transform: translateX(-1.75rem) rotate(-2deg); }
+.motion-ready .project.in .project-body,
+.motion-ready .project.in .project-art { opacity: 1; transform: none; }
+
+.motion-ready .project-art img { animation: float 7s ease-in-out infinite; }
+.motion-ready .project:nth-of-type(even) .project-art img { animation-delay: -3.5s; }
+.project-art { transition: transform 0.35s cubic-bezier(.2,.7,.3,1), box-shadow 0.35s ease; }
+.project-art:hover {
+    transform: translateY(-0.5rem) rotate(-1.5deg) scale(1.03);
+    box-shadow: 0 22px 40px -22px rgba(10, 26, 48, 0.7);
+}
+@keyframes float {
+    0%, 100% { transform: translateY(-0.25rem); }
+    50% { transform: translateY(0.25rem); }
+}
+
+/* the rule over each step draws itself in */
+.motion-ready .step { border-top-color: transparent; position: relative; }
+.motion-ready .step::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--text-main);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.7s cubic-bezier(.2,.7,.3,1) var(--d, 0s);
+}
+.motion-ready .step:first-child::before { background: var(--accent-display); }
+.motion-ready .step.in::before { transform: scaleX(1); }
+
+/* the number arrives a touch after its row */
+.motion-ready .project .project-num {
+    transform: scale(0.7) rotate(-8deg);
+    transition: transform 0.6s cubic-bezier(.34,1.56,.64,1) 0.2s;
+}
+.motion-ready .project.in .project-num { transform: none; }
+
+/* small, everyday feedback */
+.btn:active { transform: translateY(1px) scale(0.99); }
+.brand img { transition: transform 0.4s cubic-bezier(.34,1.56,.64,1); }
+.brand:hover img { transform: rotate(-10deg) scale(1.06); }
+.project-link .arrow { transition: transform 0.25s ease; }
+.project-link:hover .arrow { transform: translateX(-0.35rem); }
+.service svg { transition: transform 0.4s cubic-bezier(.34,1.56,.64,1); }
+.service:hover svg { transform: scale(1.15) rotate(-6deg); }
+.site-nav .nav-link { position: relative; }
+.site-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    bottom: 0.25rem;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-display);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(.2,.7,.3,1);
+}
+.site-nav .nav-link:hover::after,
+.site-nav .nav-link:focus-visible::after { transform: scaleX(1); }
+
+/* the main call to action sends out a quiet ring every few seconds, and
+   stops the moment anyone reaches for it */
+.motion-ready .btn-pulse { position: relative; }
+.motion-ready .btn-pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 2px solid #25d366;
+    animation: ring 4.5s ease-out infinite;
+    pointer-events: none;
+}
+.motion-ready .btn-pulse:hover::after,
+.motion-ready .btn-pulse:focus-visible::after { animation: none; opacity: 0; }
+@keyframes ring {
+    0% { transform: scale(1); opacity: 0.9; }
+    22%, 100% { transform: scale(1.14); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .motion-ready .hero-mesh,
+    .motion-ready .hero-mesh circle,
+    .motion-ready .project-art img,
+    .motion-ready .btn-pulse::after { animation: none; }
+}
+.a11y-no-motion :where(.hero .eyebrow, .hero h1, .hero-aside p, .hero-actions, .strip li,
+    .section-head, .service, .project, .step,
+    .contact h2, .contact-lead, .contact-actions) { opacity: 1 !important; transform: none !important; }
+.a11y-no-motion .step { border-top-color: var(--text-main); }
+.a11y-no-motion .step:first-child { border-top-color: var(--accent-display); }
+.a11y-no-motion .step::before,
+.a11y-no-motion .btn-pulse::after { display: none; }
+.a11y-no-motion .project-num,
+.a11y-no-motion .project-body,
+.a11y-no-motion .project-art { transform: none !important; opacity: 1 !important; }
+.a11y-no-motion .project-art img { animation: none; }
 
 /* ---- accessibility drawer ----------------------------------------
    Reused from the stories site so both properties behave the same way. */

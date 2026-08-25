@@ -29,6 +29,8 @@
     overlay.appendChild(img);
     document.body.appendChild(overlay);
     root.classList.add('intro-playing');
+    /* the hero waits for the logo to land before it moves */
+    root.style.setProperty('--intro-hold', '1.05s');
 
     var done = false;
     var timers = [];
