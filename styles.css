@@ -1240,3 +1240,28 @@ a:hover { color: var(--accent-hover); }
     body { padding-bottom: 4.5rem; }
     .a11y-toggle { bottom: 5.25rem !important; }
 }
+
+/* ---- LeadPal back office gallery (desktop screenshots) ----------- */
+
+.backoffice { margin: 0 0 2.75rem; }
+.backoffice-head { margin-bottom: 1.25rem; }
+.backoffice-head h3 { font-size: clamp(1.35rem, 2.6vw, 1.75rem); font-weight: 800; margin-bottom: 0.4rem; }
+.backoffice-head p { color: var(--text-muted); max-width: 44rem; }
+.backoffice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+.bo-shot--main { grid-column: 1 / -1; }
+@media (max-width: 48rem) { .backoffice-grid { grid-template-columns: 1fr; } }
+.bo-shot { margin: 0; min-width: 0; }
+.bo-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--shadow-lg);
+    background: var(--bg-card);
+}
+.bo-shot figcaption { margin-top: 0.6rem; font-size: 0.95rem; color: var(--text-muted); }
