@@ -134,7 +134,6 @@ a:hover { color: var(--accent-hover); }
     gap: 0.75rem;
     font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
     color: var(--accent);
 }
 .eyebrow::before {
@@ -282,7 +281,6 @@ a:hover { color: var(--accent-hover); }
     display: block;
     font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.06em;
     color: var(--text-muted);
 }
 
@@ -291,7 +289,7 @@ a:hover { color: var(--accent-hover); }
    disappearing */
 .brand { margin-inline-end: auto; }
 .site-nav { display: flex; align-items: center; gap: 1.75rem; order: 2; }
-.header-cta { order: 3; }
+.header-actions { order: 3; display: flex; align-items: center; gap: 0.9rem; }
 .site-nav a {
     color: var(--text-main);
     text-decoration: none;
@@ -363,11 +361,9 @@ a:hover { color: var(--accent-hover); }
     flex-wrap: wrap;
     gap: 0.75rem 1.4rem;
 }
-.strip h2 {
-    font-family: inherit;
-    font-size: 0.78rem;
+.strip-label {
+    font-size: 0.85rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
     color: var(--band-accent);
     margin: 0;
 }
@@ -399,14 +395,13 @@ a:hover { color: var(--accent-hover); }
 
 .section-head {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1.25rem 2.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
     margin-bottom: 2.5rem;
 }
 .section-head h2 { font-size: clamp(2rem, 4.2vw, 3.4rem); font-weight: 800; }
-.section-head p { max-width: 30rem; color: var(--text-muted); }
+.section-head p { max-width: 38rem; color: var(--text-muted); font-size: 1.1rem; }
 
 /* ---- services ----------------------------------------------------- */
 
@@ -425,13 +420,13 @@ a:hover { color: var(--accent-hover); }
     padding: 1.9rem 0;
     border-bottom: 1px solid var(--line);
 }
-.services .service:nth-child(odd) { padding-inline-end: 2.5rem; border-inline-start: 1px solid var(--line); }
+.services .service:nth-child(odd) { padding-inline-end: 2.5rem; border-inline-end: 1px solid var(--line); }
 .services .service:nth-child(even) { padding-inline-start: 2.5rem; }
 @media (max-width: 48rem) {
     .services .service:nth-child(odd),
     .services .service:nth-child(even) {
         padding-inline: 0;
-        border-inline-start: 0;
+        border-inline-end: 0;
     }
 }
 .service svg { width: 1.75rem; height: 1.75rem; flex: 0 0 auto; margin-top: 0.25rem; color: var(--accent); }
@@ -462,16 +457,14 @@ a:hover { color: var(--accent-hover); }
     font-size: clamp(2rem, 4vw, 2.9rem);
     font-weight: 800;
     line-height: 1;
-    color: var(--accent-display);
-    direction: ltr;
+    color: var(--accent);
     align-self: start;
 }
 .project-body { display: flex; flex-direction: column; gap: 0.6rem; align-self: start; }
 .project-body h3 { font-size: clamp(1.5rem, 3vw, 2.15rem); font-weight: 800; }
 .project-kind {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
     color: var(--accent);
 }
 .project-body p { color: var(--text-body); }
@@ -484,7 +477,7 @@ a:hover { color: var(--accent-hover); }
     font-weight: 700;
     color: var(--text-main);
     text-decoration: none;
-    border-bottom: 2px solid var(--accent-display);
+    border-bottom: 2px solid var(--accent);
 }
 .project-link:hover { color: var(--accent); border-color: var(--accent); }
 .project-link .arrow { direction: ltr; }
@@ -523,10 +516,9 @@ a:hover { color: var(--accent-hover); }
     font-family: 'Frank Ruhl Libre', 'David Libre', Georgia, serif;
     font-size: 1.9rem;
     font-weight: 800;
-    direction: ltr;
     color: var(--text-main);
 }
-.step:first-child .step-num { color: var(--accent-display); }
+.step:first-child .step-num { color: var(--accent); }
 .step h3 { font-size: 1.45rem; font-weight: 700; margin: 0.5rem 0 0.6rem; }
 .step p { color: var(--text-muted); }
 
@@ -1008,4 +1000,243 @@ a:hover { color: var(--accent-hover); }
 
 @media (max-width: 35rem) {
     .a11y-toggle { bottom: 1rem; left: 1rem; }
+}
+
+/* ==== 2026-11 refresh: audiences, portfolio grid, about + FAQ, quick contact ==== */
+
+.btn svg { width: 1.2rem; height: 1.2rem; flex: 0 0 auto; }
+.hero-actions-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.hero-actions-row .btn { flex: 1 1 12rem; }
+.hero-actions-row a[href^="tel:"] span { direction: ltr; unicode-bidi: isolate; }
+
+/* header: phone number beside the WhatsApp mark */
+.header-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-main);
+    font-weight: 700;
+    text-decoration: none;
+    min-height: 2.75rem;
+}
+.header-phone svg { width: 1.15rem; height: 1.15rem; color: var(--accent); }
+.header-phone span { direction: ltr; unicode-bidi: isolate; }
+.header-phone:hover { color: var(--accent); }
+@media (max-width: 40rem) {
+    .header-phone span { display: none; }
+    .site-nav { gap: 1rem; font-size: 0.92rem; overflow-x: auto; flex-wrap: nowrap; white-space: nowrap; }
+    .site-header .wrap { padding-block: 0.6rem; }
+}
+
+/* the names strip is a label, not a heading */
+.strip-label { margin: 0; color: var(--band-accent); }
+
+/* ---- who it's for ------------------------------------------------- */
+
+.who-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+@media (max-width: 66rem) { .who-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 36rem) { .who-grid { grid-template-columns: 1fr; } }
+.who-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+}
+.who-card > svg { width: 2rem; height: 2rem; color: var(--accent); }
+.who-card h3 { font-size: 1.35rem; font-weight: 800; }
+.who-card ul { margin: 0; padding-inline-start: 1.1rem; display: flex; flex-direction: column; gap: 0.45rem; color: var(--text-body); flex: 1; }
+.who-link, .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    min-height: 2.75rem;
+}
+.who-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+/* ---- portfolio: one featured system, then a grid ---------------- */
+
+.project--featured {
+    grid-template-columns: minmax(0, 1fr) 16rem;
+    border-top: 0;
+    border-bottom: 1px solid var(--line-strong);
+    padding-top: 0;
+    margin-bottom: 2rem;
+}
+.project--featured:last-of-type { border-bottom: 1px solid var(--line-strong); }
+.project--featured .project-body h3 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+.project--featured .project-body p:not(.project-kind) { font-size: 1.1rem; max-width: 40rem; }
+@media (max-width: 62rem) {
+    .project--featured { grid-template-columns: 1fr; }
+    .project--featured .project-art { grid-column: auto; }
+}
+
+.work-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+.filter {
+    font: inherit;
+    font-weight: 600;
+    min-height: 2.6rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-card);
+    color: var(--text-main);
+    cursor: pointer;
+}
+.filter[aria-pressed="true"] { background: var(--text-main); color: var(--bg-primary); border-color: var(--text-main); }
+.filter:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.work-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+@media (max-width: 62rem) { .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 36rem) { .work-grid { grid-template-columns: 1fr; } }
+.card[hidden] { display: none; }
+.card-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.card-link:hover { border-color: var(--accent); transform: translateY(-3px); color: var(--text-main); }
+.card-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.card-shot {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+}
+.card-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.card-body { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.1rem 1.25rem 1.25rem; flex: 1; }
+.card-kind { font-size: 0.85rem; font-weight: 700; color: var(--accent); }
+.card-title { font-family: 'Frank Ruhl Libre', 'David Libre', Georgia, serif; font-size: 1.5rem; font-weight: 800; line-height: 1.2; }
+.card-desc { color: var(--text-body); flex: 1; }
+.card-cta { margin-top: 0.25rem; }
+
+.tools-title { font-size: 1.35rem; font-weight: 700; margin: 2.75rem 0 1rem; }
+.tools {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+@media (max-width: 62rem) { .tools { grid-template-columns: 1fr; } }
+.tools a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+    text-decoration: none;
+    height: 100%;
+}
+.tools a:hover { border-color: var(--accent); color: var(--text-main); }
+.tools img { width: 4rem; height: 4rem; object-fit: cover; object-position: top; border-radius: 0.6rem; border: 1px solid var(--line); flex: 0 0 auto; }
+.tools strong { display: block; font-size: 1.05rem; }
+.tools span span { color: var(--text-muted); font-size: 0.95rem; }
+
+.mid-cta {
+    margin-top: 2.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--band-bg);
+    color: var(--band-text);
+    border-radius: var(--radius-md);
+}
+.mid-cta p { margin: 0; font-family: 'Frank Ruhl Libre', 'David Libre', Georgia, serif; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; color: var(--band-text); }
+
+/* ---- about + FAQ -------------------------------------------------- */
+
+.about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+}
+@media (max-width: 60rem) { .about { grid-template-columns: 1fr; } }
+.about h2 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 800; margin-bottom: 1rem; }
+.about p { color: var(--text-body); font-size: 1.1rem; margin-bottom: 0.9rem; max-width: 36rem; }
+.about-place { font-weight: 700; color: var(--accent) !important; }
+.faq-title { font-size: 1.6rem !important; }
+.faq-item { border-top: 1px solid var(--line); }
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1rem;
+    min-height: 2.75rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-size: 1.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.faq-item h3 { font-size: 1.15rem; font-weight: 700; margin: 0; font-family: inherit; }
+.faq-item p { color: var(--text-body); padding-bottom: 1rem; margin: 0; }
+
+/* ---- sticky quick-contact bar on phones -------------------------- */
+
+.mobile-bar { display: none; }
+@media (max-width: 40rem) {
+    .mobile-bar {
+        position: fixed;
+        inset: auto 0 0 0;
+        z-index: 80;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+        background: var(--bg-primary);
+        border-top: 1px solid var(--line);
+        box-shadow: 0 -10px 24px -20px rgba(10, 26, 48, 0.8);
+    }
+    .mobile-bar a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-height: 3rem;
+        border-radius: var(--radius-md);
+        font-weight: 700;
+        text-decoration: none;
+        border: 1px solid var(--line-strong);
+        color: var(--text-main);
+    }
+    .mobile-bar svg { width: 1.2rem; height: 1.2rem; }
+    .mobile-bar .mobile-bar-wa { background: #25d366; color: #05271a; border-color: #25d366; }
+    body { padding-bottom: 4.5rem; }
+    .a11y-toggle { bottom: 5.25rem !important; }
 }
